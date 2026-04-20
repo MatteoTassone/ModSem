@@ -1,0 +1,1066 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/"
+     xml:base="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:dbo="http://dbpedia.org/ontology/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:schema="https://schema.org/">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita">
+        <dc:creator xml:lang="it">Matteo Tassone</dc:creator>
+        <dc:date>2026-04-10</dc:date>
+        <dc:description xml:lang="it">L&apos;ontologia &quot;Turismo e Mobilità&quot; modella il sistema logistico e spaziale che ruota attorno all&apos;esperienza di viaggio. L&apos;ontologia rappresenta l&apos;intersezione tra la localizzazione geografica, le strutture ricettive, le attrazioni culturali e le infrastrutture di trasporto che ne consentono l&apos;accessibilità.</dc:description>
+        <dc:title xml:lang="it">Ontologia del Turismo e della Mobilità</dc:title>
+        <vann:preferredNamespacePrefix>tm</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/</vann:preferredNamespaceUri>
+        <rdfs:label xml:lang="en">Tourism and Mobility</rdfs:label>
+        <rdfs:label xml:lang="it">Turismo e Mobilità</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/date -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/date"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/title -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/title"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/eSedeDi -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/eSedeDi">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haSede"/>
+        <rdfs:comment xml:lang="it">Relazione inversa di &apos;si trova in&apos; che indica quali punti di interesse sono ospitati in un&apos;area.</rdfs:comment>
+        <rdfs:label xml:lang="it">sedeDi</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/fornitoDa -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/fornitoDa">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/gestisce"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Compagnia"/>
+        <rdfs:comment xml:lang="it">Specifica la compagnia che gestisce il servizio di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">fornitoDa</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/gestisce -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/gestisce">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Compagnia"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:comment xml:lang="it">Specifica il mezzo di trasporto che effettua il servizio.</rdfs:comment>
+        <rdfs:label xml:lang="it">fornisce</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haDestinazioneFinale -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haDestinazioneFinale">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <rdfs:comment xml:lang="it">Specifica l&apos;unica e univoca infrastruttura logistica in cui termina definitivamente il servizio di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">haDestinazioneFinale</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoArrivo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoArrivo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <rdfs:comment xml:lang="it">Indica l&apos;infrastruttura logistica di destinazione finale del servizio di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">haPuntoArrivo</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoPartenza -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoPartenza">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/puntoPartenzaDi"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <rdfs:comment xml:lang="it">Indica l&apos;infrastruttura logistica (es. aeroporto) da cui ha inizio il servizio di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">haPuntoPartenza</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haSede -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haSede">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/EntitaGeografica"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica"/>
+        <rdfs:comment xml:lang="it">Relazione spaziale di inclusione che connette un&apos;entità geografica o un punto di interesse alla sua area di appartenenza.</rdfs:comment>
+        <rdfs:label xml:lang="it">haSede</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haTappa -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haTappa">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:comment xml:lang="it">Specifica i punti di interesse presenti nell&apos;itinerario.</rdfs:comment>
+        <rdfs:comment xml:lang="it">haTappa</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/offreAccessoA -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/offreAccessoA">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica"/>
+        <rdfs:comment xml:lang="it">Specifica le attrazioni turistiche raggiungibili utilizzando una determinata infrastruttura di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">offreAccessoA</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/puntoPartenzaDi -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/puntoPartenzaDi">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:comment xml:lang="it">Specifica quale mezzo di trasporto parte da un determinato nodo logistico.</rdfs:comment>
+        <rdfs:label xml:lang="it">èPuntoPartenzaDi</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/raggiungeArea -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/raggiungeArea">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoArrivo"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haSede"/>
+        </owl:propertyChainAxiom>
+        <rdfs:label xml:lang="it">raggiungeAreaGeografica</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/utilizzaMezzo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/utilizzaMezzo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:comment xml:lang="it">Specifica il mezzo di trasporto utilizzato nell&apos;itinerario.</rdfs:comment>
+        <rdfs:label xml:lang="it">utilizzaMezzo</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/vicinoA -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/vicinoA">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:comment xml:lang="it">Specifica i punti di interesse nelle vicinanze in modo simmetrico  (es: se l&apos;Hotel è vicino al Museo, il Museo è vicino all&apos;Hotel).</rdfs:comment>
+        <rdfs:label xml:lang="it">vicinoA</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/annoCostruzione -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/annoCostruzione">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica"/>
+        <rdfs:comment xml:lang="it">Specifica l&apos;anno di costruzione delle attrazioni turistiche</rdfs:comment>
+        <rdfs:label xml:lang="it">annoCostruzione</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/capacitaOspiti -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/capacitaOspiti">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StrutturaRicettiva"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:comment xml:lang="it">Specifica quanti posti ospita il mezzo di trasporto o la struttura ricettiva.</rdfs:comment>
+        <rdfs:label xml:lang="it">capacitaOspiti</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/durataGiorni -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/durataGiorni">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario"/>
+        <rdfs:comment>Specifica la durata in giorni dell&apos;itinerario.</rdfs:comment>
+        <rdfs:label xml:lang="it">durataGiorni</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haLatitudine -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haLatitudine">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment xml:lang="it">Specifica la latitudine di una determinata Area Geografica.</rdfs:comment>
+        <rdfs:label xml:lang="it">haLatitudine</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haLongitudine -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haLongitudine">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment xml:lang="it">Specifica la longitudine di una determinata Area Geografica.</rdfs:comment>
+        <rdfs:label xml:lang="it">haLongitudine</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haNumeroStelle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haNumeroStelle">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Hotel"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xsd:minInclusive>
+                    </rdf:Description>
+                    <rdf:Description>
+                        <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</xsd:maxInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:comment xml:lang="it">Specifica il numero di stelle di un determinato Hotel.</rdfs:comment>
+        <rdfs:label xml:lang="it">haNumeroStelle</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPopolazione -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPopolazione">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="it">Specifica il numero di abitanti per una determinata Area Geografica</rdfs:comment>
+        <rdfs:label xml:lang="it">haPopolazione</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haSitoWeb -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haSitoWeb">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Compagnia"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:comment xml:lang="it">Specifica il sito della Compagnia o dell&apos;AttrazioneTuristica.</rdfs:comment>
+        <rdfs:label xml:lang="it">haSitoWeb</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/numeroMezzo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/numeroMezzo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="it">Speifica il numero del mezzo impiegato nel trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">numeroMezzo</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/prezzoMedio -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/prezzoMedio">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StrutturaRicettiva"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="it">Specifica il valore del prezzo in euro.</rdfs:comment>
+        <rdfs:label xml:lang="it">haPrezzo</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dbpedia.org/ontology/City -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/City">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Citta"/>
+    </owl:Class>
+    
+
+
+    <!-- http://schema.org/Apartment -->
+
+    <owl:Class rdf:about="http://schema.org/Apartment">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Appartamento"/>
+    </owl:Class>
+    
+
+
+    <!-- http://schema.org/Hostel -->
+
+    <owl:Class rdf:about="http://schema.org/Hostel">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Ostello"/>
+    </owl:Class>
+    
+
+
+    <!-- http://schema.org/Hotel -->
+
+    <owl:Class rdf:about="http://schema.org/Hotel">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Hotel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aereo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aereo">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoPartenza"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aeroporto"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoPartenza"/>
+                        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aeroporto"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Treno"/>
+        <rdfs:comment xml:lang="it">Aeromobile che opera su una specifica tratta aerea.</rdfs:comment>
+        <rdfs:label xml:lang="it">Aereo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aeroporto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aeroporto">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazioneFerroviaria"/>
+        <rdfs:comment xml:lang="it">Infrastruttura logistica complessa dotata di piste e terminal per il decollo, l&apos;atterraggio e il transito dei voli.</rdfs:comment>
+        <rdfs:label xml:lang="it">Aeroporto</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Appartamento -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Appartamento">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StrutturaRicettiva"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Hotel"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Ostello"/>
+        <rdfs:comment xml:lang="it">Struttura ricettiva che comprende interi appartamenti compresi di forniture e servizi necessari all&apos;intero soggiorno</rdfs:comment>
+        <rdfs:label xml:lang="it">Appartamento</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/EntitaGeografica"/>
+        <rdfs:comment xml:lang="it">Porzione di territorio spazialmente, come una nazione, una regione o una città.</rdfs:comment>
+        <rdfs:label xml:lang="it">AreaGeografica</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:comment xml:lang="it">Luogo, monumento, museo o area naturale di interesse culturale, storico, o di svago per i visitatori.</rdfs:comment>
+        <rdfs:label xml:lang="it">AttrazioneTuristica</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Citta -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Citta">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Continente"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Nazione"/>
+        <rdfs:comment xml:lang="it">Centro abitato caratterizzato da un&apos;elevata densità di popolazione e funzioni amministrative.</rdfs:comment>
+        <rdfs:label xml:lang="it">Città</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Compagnia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Compagnia">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/gestisce"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/EntitaGeografica"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:comment xml:lang="it">Organizzazione, ente o agenzia commerciale che gestisce e fornisce servizi operativi legati al trasporto pubblico o privato.</rdfs:comment>
+        <rdfs:label xml:lang="it">Compagnia</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Continente -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Continente">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Africa"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/America"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Antartide"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Asia"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Europa"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Oceania"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/eSedeDi"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Nazione"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Nazione"/>
+        <rdfs:comment xml:lang="it">Specifica la più vasta delle ripartizioni con le quali si suddividono le terre emerse della crosta terrestre.</rdfs:comment>
+        <rdfs:label xml:lang="it">Continente</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/EntitaGeografica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/EntitaGeografica">
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:comment xml:lang="it">Qualsiasi elemento fisico, spaziale o amministrativo dotato di una specifica collocazione sul territorio.</rdfs:comment>
+        <rdfs:label xml:lang="it">EntitàGeografica</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Hotel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Hotel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StrutturaRicettiva"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Ostello"/>
+        <rdfs:comment xml:lang="it">Struttura ricettiva alberghiera che offre alloggio in camere arredate e servizi accessori.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:comment xml:lang="it">Nodo logistico (es. stazione, aeroporto o fermata) progettato per supportare l&apos;accesso alle reti di mobilità.</rdfs:comment>
+        <rdfs:label xml:lang="it">InfrastrutturaTrasporto</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haTappa"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:comment xml:lang="it">Percorso turistico programmato, costituito da una sequenza organizzata di tappe.</rdfs:comment>
+        <rdfs:label xml:lang="it">Itinerario</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto">
+        <rdfs:comment xml:lang="it">Veicolo utilizzato per il trasferimento di persone da una località all&apos;altra.</rdfs:comment>
+        <rdfs:label xml:lang="it">MezzoTrasporto</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Monumento -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Monumento">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Museo"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Parco"/>
+        <rdfs:comment xml:lang="it">Opera architettonica, scultorea o sito di particolare valore storico e culturale.</rdfs:comment>
+        <rdfs:label xml:lang="it">Monumento</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Museo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Museo">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Parco"/>
+        <rdfs:comment xml:lang="it">Istituzione culturale permanente che acquisisce, conserva ed espone collezioni di beni artistici, storici o scientifici.</rdfs:comment>
+        <rdfs:label xml:lang="it">Museo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Nazione -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Nazione">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AreaGeografica"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/eSedeDi"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Citta"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="it">Entità territoriale sovrana, definita da confini geografici riconosciuti.</rdfs:comment>
+        <rdfs:label xml:lang="it">Nazione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Ostello -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Ostello">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StrutturaRicettiva"/>
+        <rdfs:comment xml:lang="it">Struttura ricettiva economica con camerate condivise, spazi comuni e servizi igienici spesso in condivisione.</rdfs:comment>
+        <rdfs:label xml:lang="it">Ostello</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Parco -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Parco">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AttrazioneTuristica"/>
+        <rdfs:comment xml:lang="it">Area naturale o urbana delimitata, tutelata per il suo valore ambientale o ricreativo.</rdfs:comment>
+        <rdfs:label xml:lang="it">Parco</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Pullman -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Pullman">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:comment xml:lang="it">Autobus confortevole per servizi turistici o di linea.</rdfs:comment>
+        <rdfs:label xml:lang="it">Pullman</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/EntitaGeografica"/>
+        <rdfs:comment xml:lang="it">Luogo o entità spaziale specifica (POI - Point of Interest) di particolare rilevanza logistica, culturale o turistica.</rdfs:comment>
+        <rdfs:label xml:lang="it">PuntoInteresse</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazioneFerroviaria -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazioneFerroviaria">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <rdfs:comment xml:lang="it">Infrastruttura attrezzata per la fermata dei treni, la salita e discesa dei passeggeri e lo smistamento dei convogli.</rdfs:comment>
+        <rdfs:label xml:lang="it">StazioneFerroviaria</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazionePullman -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazionePullman">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/InfrastrutturaTrasporto"/>
+        <rdfs:comment xml:lang="it">Specifica l&apos;infrastruttura attrezzata,  che funge da capolinea e punto di interscambio per numerose linee di autobus.</rdfs:comment>
+        <rdfs:label xml:lang="it">StazionePullman</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StrutturaRicettiva -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StrutturaRicettiva">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/PuntoInteresse"/>
+        <rdfs:comment xml:lang="it">Struttura commerciale o privata adibita al pernottamento e all&apos;ospitalità dei viaggiatori.</rdfs:comment>
+        <rdfs:label xml:lang="it">StrutturaRicettiva</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Treno -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Treno">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/MezzoDiTrasporto"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoPartenza"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazioneFerroviaria"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/haPuntoPartenza"/>
+                        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazioneFerroviaria"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="it">Mezzo di trasporto su rotaia costituito da un convoglio di vagoni.</rdfs:comment>
+        <rdfs:label xml:lang="it">Treno</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Africa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Africa">
+        <rdfs:comment xml:lang="it">Specifica il nome proprio del continente.</rdfs:comment>
+        <rdfs:label xml:lang="it">Africa</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AirBus_A350-900 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AirBus_A350-900">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aereo"/>
+        <fornitoDa rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/ITA_Airways"/>
+        <haPuntoArrivo rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Los_Angeles"/>
+        <haPuntoPartenza rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma_Fiumicino"/>
+        <capacitaOspiti rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">320</capacitaOspiti>
+        <numeroMezzo>AZ 620</numeroMezzo>
+        <rdfs:comment xml:lang="it">Specifica il numero che identifica il mezzo di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="en">Airbus-A350-900</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/America -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/America">
+        <rdfs:comment xml:lang="it">Specifica il nome proprio del continente.</rdfs:comment>
+        <rdfs:label xml:lang="it">America</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Antartide -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Antartide">
+        <rdfs:comment xml:lang="it">Specifica il nome proprio del continente.</rdfs:comment>
+        <rdfs:label xml:lang="it">Antartide</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Appartamento_Rosemary -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Appartamento_Rosemary">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Appartamento"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Los_Angeles"/>
+        <vicinoA rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/LAX"/>
+        <capacitaOspiti rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</capacitaOspiti>
+        <prezzoMedio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">175</prezzoMedio>
+        <rdfs:comment xml:lang="it">Specifica il nome che identitica la struttura ricettiva.</rdfs:comment>
+        <rdfs:label xml:lang="it">Appartamento_Rosemary</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Asia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Asia">
+        <rdfs:comment xml:lang="it">Specifica il nome proprio del continente.</rdfs:comment>
+        <rdfs:label xml:lang="it">Asia</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/California -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/California">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Nazione"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/America"/>
+        <haPopolazione rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">39000000</haPopolazione>
+        <rdfs:comment xml:lang="it">Specifica il nome proprio della nazione.</rdfs:comment>
+        <rdfs:label xml:lang="it">California</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Colosseo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Colosseo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Monumento"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma"/>
+        <annoCostruzione rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">70</annoCostruzione>
+        <haLatitudine rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">41.89</haLatitudine>
+        <haLongitudine rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">12.49</haLongitudine>
+        <prezzoMedio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</prezzoMedio>
+        <rdfs:comment xml:lang="it">Specifica il nome del più grande anfiteatro romano.</rdfs:comment>
+        <rdfs:label xml:lang="it">Colosseo</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Europa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Europa">
+        <rdfs:comment xml:lang="it">Specifica il nome proprio del continente.</rdfs:comment>
+        <rdfs:label xml:lang="it">Europa</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Frecciarossa_9611 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Frecciarossa_9611">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Treno"/>
+        <fornitoDa rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Trenitalia"/>
+        <haPuntoArrivo rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma_Termini"/>
+        <haPuntoPartenza rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Torino_PortaSusa"/>
+        <capacitaOspiti rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">450</capacitaOspiti>
+        <numeroMezzo>9611</numeroMezzo>
+        <rdfs:comment xml:lang="it">Specifica il numero che identifica il mezzo di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">Frecciarossa_9611</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/ITA_Airways -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/ITA_Airways">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Compagnia"/>
+        <haSitoWeb rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://www.ita-airways.com/it/it/homepage</haSitoWeb>
+        <rdfs:comment xml:lang="it">Specfiica il nome della compagnia del mezzo di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">ITA_Airways</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Italia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Italia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Nazione"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Europa"/>
+        <haPopolazione rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">59000000</haPopolazione>
+        <rdfs:comment xml:lang="it">Specifica il nome proprio della nazione.</rdfs:comment>
+        <rdfs:label xml:lang="it">Italia</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/LAX -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/LAX">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aeroporto"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Los_Angeles"/>
+        <rdfs:comment xml:lang="it">Specifica il nome dell&apos;aeroporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">LAX</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Los_Angeles -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Los_Angeles">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Citta"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/California"/>
+        <haPopolazione rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3900000</haPopolazione>
+        <rdfs:comment xml:lang="it">Specifica il nome proprio della città.</rdfs:comment>
+        <rdfs:label xml:lang="en">Los Angeles</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Oceania -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Oceania">
+        <rdfs:comment xml:lang="it">Specifica il nome proprio del continente.</rdfs:comment>
+        <rdfs:label xml:lang="it">Oceania</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Raeli_Siracusa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Raeli_Siracusa">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Hotel"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma"/>
+        <vicinoA rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma_Termini"/>
+        <capacitaOspiti rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</capacitaOspiti>
+        <haNumeroStelle rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</haNumeroStelle>
+        <prezzoMedio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">122</prezzoMedio>
+        <rdfs:comment xml:lang="it">Specifica il nome che identitica la struttura ricettiva.</rdfs:comment>
+        <rdfs:label xml:lang="it">Hotel_RaeliSiracusa</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Citta"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Italia"/>
+        <haPopolazione rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2800000</haPopolazione>
+        <rdfs:comment xml:lang="it">Specifica il nome proprio della città.</rdfs:comment>
+        <rdfs:label xml:lang="it">Roma</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma_Fiumicino -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma_Fiumicino">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Aeroporto"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma"/>
+        <offreAccessoA rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Colosseo"/>
+        <rdfs:comment xml:lang="it">Roma_Fiumicino</rdfs:comment>
+        <rdfs:comment xml:lang="it">Specifica il nome dell&apos;aeroporto.</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma_Termini -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma_Termini">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazioneFerroviaria"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Roma"/>
+        <offreAccessoA rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Colosseo"/>
+        <rdfs:comment xml:lang="it">Specifica il nome della stazione ferroviaria.</rdfs:comment>
+        <rdfs:label xml:lang="it">Roma_Termini</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Settimana_Corsi -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Settimana_Corsi">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario"/>
+        <haTappa rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Appartamento_Rosemary"/>
+        <haTappa rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Venice_Beach"/>
+        <utilizzaMezzo rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/AirBus_A350-900"/>
+        <durataGiorni rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</durataGiorni>
+        <rdfs:comment xml:lang="it">Specifica il nome dellitinerario.</rdfs:comment>
+        <rdfs:label xml:lang="it">Settimana_Corsi</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Torino -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Torino">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Citta"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Italia"/>
+        <haPopolazione rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">853000</haPopolazione>
+        <rdfs:comment xml:lang="it">Specifica il nome proprio della città.</rdfs:comment>
+        <rdfs:label xml:lang="it">Torino</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Torino_PortaSusa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Torino_PortaSusa">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/StazioneFerroviaria"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Torino"/>
+        <rdfs:comment xml:lang="it">Specifica il nome della stazione ferroviaria.</rdfs:comment>
+        <rdfs:label xml:lang="it">Torino_PortaSusa</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Trenitalia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Trenitalia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Compagnia"/>
+        <haSitoWeb rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://www.trenitalia.com/</haSitoWeb>
+        <rdfs:comment xml:lang="it">Specfiica il nome della compagnia del mezzo di trasporto.</rdfs:comment>
+        <rdfs:label xml:lang="it">Trenitalia</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Venice_Beach -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Venice_Beach">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Parco"/>
+        <haSede rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Los_Angeles"/>
+        <annoCostruzione rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1905</annoCostruzione>
+        <haLatitudine rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">33.97</haLatitudine>
+        <haLongitudine rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-118.47</haLongitudine>
+        <rdfs:comment xml:lang="it">Specifica il nome della spiaggia di Westside Los Angeles.</rdfs:comment>
+        <rdfs:label xml:lang="it">Venice_Beach</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Weekend_Romano -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Weekend_Romano">
+        <rdf:type rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Itinerario"/>
+        <haTappa rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Colosseo"/>
+        <haTappa rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Raeli_Siracusa"/>
+        <utilizzaMezzo rdf:resource="http://www.semanticweb.org/matteo/ontologies/2026/turismo-mobilita/Frecciarossa_9611"/>
+        <durataGiorni rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</durataGiorni>
+        <rdfs:comment xml:lang="it">Specifica il nome dell&apos;itinerario.</rdfs:comment>
+        <rdfs:label xml:lang="it">Weekend_Romano</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

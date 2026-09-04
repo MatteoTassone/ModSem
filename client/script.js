@@ -291,7 +291,7 @@ createApp({
                 }
             `;
             try {
-                // Attenzione: usiamo GRAPHDB_UPDATE_ENDPOINT (che punta a /statements)
+                // GRAPHDB_UPDATE_ENDPOINT per le operazioni di UPDATE
                 const response = await fetch(GRAPHDB_UPDATE_ENDPOINT, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/sparql-update' },

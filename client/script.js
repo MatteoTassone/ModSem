@@ -35,8 +35,6 @@ createApp({
         const attrazioni = ref([]);
         const itinerari = ref([]);
         
-        // Variabile per gestire lo stato di successo dell'aggiornamento
-        const updateSuccess = ref(false);
         // --- FINE STATO APPLICAZIONE PUBBLICO GENERICO ---
 
         // --- STATO APPLICAZIONE SPECIALISTA  ---
@@ -45,18 +43,23 @@ createApp({
         const specTappeMinime = ref(); 
         const specPartenza = ref('');
         const specScopo = ref('Cultura'); // Default scopo itinerario
-        
+
         // Array per memorizzare i risultati delle query SPARQL
         const specItinerariTrovati = ref([]);
         const specItinerarioSelezionato = ref(null);
         const specAttrazioniTrovate = ref([]); 
         const specAlloggioTrovato = ref(null); 
         const specTrasportiTrovati = ref([]);
+
+        // Variabile per gestire lo stato di successo dell'aggiornamento
+        const updateSuccess = ref(false);
+
         // --- FINE STATO APPLICAZIONE SPECIALISTA  ---
 
         // --- COSTANTI GRAPHDB (tramite PROXY poiché il browser blocca la richiesta a localhost: Errore CORS) ---
         const REPO_NAME = 'ModSem'; 
         const GRAPHDB_ENDPOINT = `/proxy-graphdb/repositories/${REPO_NAME}`;
+        const GRAPHDB_UPDATE_ENDPOINT = `/proxy-graphdb/repositories/${REPO_NAME}/statements`;
         
         const PREFIXES = `
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -275,6 +278,34 @@ createApp({
             specStep.value = 4; // Sposta la UI allo step Trasporti
         }
 
+        // Funzione per inserire una nuova tappa nel database GraphDB
+        async function inserisciNuovaTappa() {
+            const updateQuery = `
+                ${PREFIXES}
+                INSERT DATA {
+                    :Giardino_Aranci rdf:type :Parco;
+                                     :haSede :Roma ;
+                                     rdfs:label "Giardino degli Aranci" ;
+                                     :annoCostruzione 1932 ;
+                                     :haPrezzo 0 .
+                }
+            `;
+            try {
+                // Attenzione: usiamo GRAPHDB_UPDATE_ENDPOINT (che punta a /statements)
+                const response = await fetch(GRAPHDB_UPDATE_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/sparql-update' },
+                    body: updateQuery
+                });
+                if (response.ok) {
+                    updateSuccess.value = true;
+                    setTimeout(() => updateSuccess.value = false, 3000); // Nasconde l'alert dopo 3 secondi
+                }
+            } catch (error) {
+                console.error("Errore UPDATE:", error);
+            }
+        }
+
         // Ritorna le variabili e le funzioni per l'uso nel template Vue
         return {
             // --- GESTIONE LOGIN ---
@@ -283,7 +314,7 @@ createApp({
             // --- STATO PUBBLICO GENERICO ---
             genStep, partenza, destinazione, 
             filtroTipologia, filtroOspiti, filtroCategoriaAttrazione,
-            trasporti, alloggi, attrazioni, itinerari, updateSuccess,
+            trasporti, alloggi, attrazioni, itinerari,
             cercaTrasporti, cercaAlloggi, cercaAttrazioni, cercaItinerari,
             
             // --- STATO SPECIALISTA ---
@@ -291,7 +322,8 @@ createApp({
             specItinerarioSelezionato, specAttrazioniTrovate,
             specStep, specAlloggioTrovato, 
             specPartenza, specTrasportiTrovati,
-            cercaItinerariSpecialista, esploraItinerario, esploraAlloggio, esploraTrasporti
+            cercaItinerariSpecialista, esploraItinerario, esploraAlloggio, esploraTrasporti,
+            updateSuccess, inserisciNuovaTappa
         }
     }
 }).mount('#app');

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmarTravel</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Foglio di stile e Vue.js -->
+    <link rel="stylesheet" href="style.css"> <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="bg-light">
+
+<div id="app" class="container mt-5 mb-5">
+
+    <!-- HEADER DINAMICO -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8 text-center position-relative">
+            <button v-if="currentRole !== null" class="btn btn-outline-secondary btn-sm position-absolute top-0 end-0" @click="logout">
+                Cambia Ruolo
+            </button>
+        </div>
+    </div>
+
+    <!-- SCHERMATA 1: LOGIN UTENTE (Pubblico Generico o Specialista) -->
+    <div class="row justify-content-center" v-if="currentRole === null">
+        <div class="col-md-6 rounded-4 p-5 shadow-lg text-center bg-primary-dark">
+            <div class="mb-4"> <h3 class="text-white fw-bold">✈️ SmarTravel</h3> </div>
+            <h2 class="text-white fw-bold mt-4 mb-2">Benvenuto!</h2>
+            <p class="text-white fs-5 mb-5">Seleziona il tuo profilo per iniziare</p>
+
+            <div class="mx-auto mw-400">
+                <!-- Bottone Accesso Pubblico Generico -->
+                <button class="btn w-100 rounded-pill fw-bold text-dark bg-white fs-5 shadow-sm mb-4 d-flex align-items-center justify-content-center transition-hover btn-login" @click="impostaRuolo('generico')">
+                    <span class="me-2 fs-3">🎒</span> Pubblico Generico
+                </button>
+                <!-- Bottone Accesso Specialista -->
+                <button class="btn w-100 rounded-pill fw-bold fs-5 shadow-sm d-flex align-items-center justify-content-center transition-hover btn-action btn-login" @click="impostaRuolo('specialista')">
+                    <span class="me-2 fs-3">💼</span> Specialista
+                </button>
+            </div>  
+        </div>
+    </div>
+    <!-- FINE SCHERMATA LOGIN -->
+
+    <!-- SCHERMATA 2: PUBBLICO GENERICO -->
+    <div v-else-if="currentRole === 'generico'">
+        <div class="row justify-content-center">
+            <div class="col-md-6 rounded-4 p-5 shadow-lg text-center bg-primary-dark"> 
+                <div class="mb-4"> <h3 class="text-white fw-bold">✈️ SmarTravel</h3> </div>
+
+                <!-- --- PUBBLICO GENERICO: Ricerca Iniziale --- -->
+                <div v-if="genStep === 0">
+                    <h3 class="text-white fw-bold mt-4 mb-2">Benvenuto!</h3>
+                    <p class="text-white fs-5 mb-5">Pianifica qui il tuo viaggio</p>
+
+                    <div class="mx-auto mw-400">
+                        <!-- Input per luogo di partenza -->
+                        <div class="input-group mb-3 shadow-sm rounded-pill bg-white p-1">
+                            <span class="input-group-text bg-transparent border-0 fs-5">📍</span>
+                            <input type="text" class="form-control border-0 shadow-none bg-transparent fw-bold" v-model="partenza" placeholder="Da dove parti? (es. Torino)">
+                        </div>
+                        <!-- Input per luogo di destinazione -->
+                        <div class="input-group mb-4 shadow-sm rounded-pill bg-white p-1">
+                            <span class="input-group-text bg-transparent border-0 fs-5">📍</span>
+                            <input type="text" class="form-control border-0 shadow-none bg-transparent fw-bold" v-model="destinazione" placeholder="Dove vuoi andare? (es. Roma)">
+                        </div>
+                        <button class="btn w-100 rounded-pill fw-bold fs-5 shadow btn-action btn-cerca" @click="cercaTrasporti">
+                            Cerca
+                        </button>
+                    </div>
+                </div>
+
+                <!-- --- TIMELINE grafica stato di avanzamento --- -->
+                <div v-if="genStep >= 1 && genStep <= 3" class="d-flex justify-content-center align-items-center mb-5 position-relative mt-2">
+                    <div class="position-absolute timeline-line"></div>
+                    
+                    <!-- Passo 1: Trasporti -->
+                    <div class="text-center position-relative mx-4 timeline-step">
+                        <div :class="genStep === 1 ? 'bg-white text-primary' : 'bg-secondary text-white'" class="rounded-circle d-inline-flex justify-content-center align-items-center shadow-sm border border-2 border-white timeline-icon">🚆</div>
+                        <div class="mt-2 small fw-bold text-white">1. Trasporto</div>
+                    </div>
+                    <!-- Passo 2: Alloggi -->
+                    <div class="text-center position-relative mx-4 timeline-step">
+                        <div :class="genStep === 2 ? 'bg-white text-primary' : 'bg-secondary text-white'" class="rounded-circle d-inline-flex justify-content-center align-items-center shadow-sm border border-2 border-white timeline-icon">🏨</div>
+                        <div class="mt-2 small fw-bold text-white">2. Alloggio</div>
+                    </div>
+                    <!-- Passo 3: Attrazioni -->
+                    <div class="text-center position-relative mx-4 timeline-step">
+                        <div :class="genStep === 3 ? 'bg-white text-primary' : 'bg-secondary text-white'" class="rounded-circle d-inline-flex justify-content-center align-items-center shadow-sm border border-2 border-white timeline-icon">🏛️</div>
+                        <div class="mt-2 small fw-bold text-white">3. Attrazioni</div>
+                    </div>
+                </div>
+
+                <!-- --- PUBBLICO GENERICO STEP 1: Trasporti --- -->
+                <div v-if="genStep === 1">
+                    <h4 class="text-white mb-4">Trasporti disponibili per: <span class="fw-bold fs-3">{{ destinazione }}</span></h4>
+                    
+                    <!-- Card con informazioni per ogni mezzo di trasporto trovato -->
+                    <div class="card p-3 mx-auto shadow-sm mb-4 border-0 d-flex flex-row align-items-center mw-400 radius-20" v-for="(mezzo, index) in trasporti" :key="index">
+                        <div class="me-3 bg-info bg-opacity-25 p-3 rounded-circle text-primary fs-2">🚆</div>
+                        <div class="text-start">
+                            <h6 class="mb-0 fw-bold text-dark">{{ mezzo.Mezzo.value }}</h6>
+                            <small class="text-muted d-block">Gestito da: <strong>{{ mezzo.Compagnia.value }}</strong></small>
+                            <small class="text-muted d-block mt-1">{{ mezzo.Partenza.value }} ➔ <strong>{{ mezzo.Arrivo.value }}</strong></small>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5 text-center">
+                        <!-- Bottone per passare allo step successivo: Alloggi -->
+                        <button class="btn btn-link text-decoration-none text-white fs-2" @click="cercaAlloggi">
+                            ➡<br><span class="fs-6 fw-light">Alloggi</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- --- PUBBLICO GENERICO STEP 2: Alloggi --- -->
+                <div v-if="genStep === 2">
+                    <h4 class="text-white mb-4">Strutture disponibili a: <span class="fw-bold fs-3">{{ destinazione }}</span></h4>
+                    
+                    <div class="row align-items-end justify-content-center mb-4 mx-auto mw-500">
+                        <div class="col-md-5 text-start">
+                            <!-- Filtro per tipologia di alloggio -->
+                            <label class="form-label text-white small mb-1">Tipologia:</label>
+                            <select class="form-select text-center rounded-pill border-0" v-model="filtroTipologia">
+                                <option value="Hotel">Hotel</option>
+                                <option value="Appartamento">Appartamento</option>
+                                <option value="Ostello">Ostello</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 text-start">
+                            <!-- Filtro per numero di ospiti -->
+                            <label class="form-label text-white small mb-1">Numero ospiti:</label>
+                            <input type="number" class="form-control text-center rounded-pill border-0" v-model="filtroOspiti" min="1">
+                        </div>
+                        <div class="col-md-3">
+                            <!-- Bottone per applicare i filtri e cercare alloggi -->
+                            <button class="btn w-100 rounded-pill fw-bold shadow btn-action" @click="cercaAlloggi">Filtra</button>
+                        </div>
+                    </div>
+
+                    <!-- Card con informazioni per ogni alloggio trovato -->
+                    <div class="card p-3 mx-auto shadow-sm mb-4 border-0 d-flex flex-row align-items-center justify-content-between mw-400 radius-20" v-for="(alloggio, index) in alloggi" :key="index">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 bg-info bg-opacity-25 p-3 rounded-circle text-primary fs-2">🏨</div>
+                            <div class="text-start">
+                                <h6 class="mb-0 fw-bold text-dark">{{ alloggio.Alloggio.value }}</h6>
+                                <small class="text-warning fw-bold">⭐ {{ alloggio.Stelle.value }}/5</small>
+                            </div>
+                        </div>
+                        <h3 class="mt-2 mb-0 fw-bold text-dark">{{ alloggio.Prezzo.value }}€</h3>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <!-- Bottone per passare allo step successivo: Attrazioni -->
+                        <button class="btn btn-link text-decoration-none text-white fs-2" @click="cercaAttrazioni">
+                            ➡<br><span class="fs-6 fw-light">Attrazioni</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- --- PUBBLICO GENERICO STEP 3: Attrazioni --- -->
+                <div v-if="genStep === 3">
+                    <h4 class="text-white mb-4">Attrazioni disponibili in base al tuo itinerario:</h4>  
+                    <div class="row align-items-end justify-content-center mb-4 mx-auto mw-400">
+                        <div class="col-md-7 text-start">
+                            <!-- Filtro per tipologia di attrazione -->
+                            <label class="form-label text-white small mb-1">Tipologia:</label>
+                            <select class="form-select text-center rounded-pill border-0" v-model="filtroCategoriaAttrazione">
+                                <option value="Tutte">Tutte le attrazioni</option>
+                                <option value="Cultura">Cultura</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <!-- Bottone per applicare i filtri e cercare attrazioni -->
+                            <button class="btn w-100 rounded-pill fw-bold shadow btn-action" @click="cercaAttrazioni">Filtra</button>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <!-- Card con informazioni per ogni attrazione trovata -->
+                        <div class="card p-3 shadow-sm border-0 d-flex flex-column text-center mw-220 radius-20" v-for="(attr, index) in attrazioni" :key="index">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <div class="me-2 bg-info bg-opacity-25 p-2 rounded-circle text-primary fs-4">🏛️</div>
+                                <h6 class="mb-0 fw-bold text-dark text-start lh-sm">{{ attr.nomeAttrazione.value }}</h6>
+                            </div>
+                            <small class="text-muted mb-2">Anno costruzione: {{ attr.anno ? attr.anno.value : 'N/D' }}</small>
+                            <h4 class="fw-bold text-dark mb-0">{{ attr.prezzo ? attr.prezzo.value : '0' }}€</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5 text-center">
+                        <!-- Bottone per passare allo step successivo: Itinerari -->
+                        <button class="btn btn-link text-decoration-none text-white fs-2" @click="cercaItinerari">
+                            ➡<br><span class="fs-6 fw-light">Scopri i migliori itinerari</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- --- PUBBLICO GENERICO STEP 4: Itinerari Finali --- -->
+                <div v-if="genStep === 4">
+                    <div class="mb-3">
+                        <div class="d-inline-block bg-secondary bg-opacity-75 rounded-circle p-3 shadow-sm text-white">
+                            <span class="fs-1">🏛️</span>
+                        </div>
+                    </div>
+                    <h3 class="fw-bold mb-3 text-white">Itinerari</h3>
+                    <p class="lead mb-5 text-white">
+                        I migliori itinerari basati su:<br>
+                        <span class="fw-bold fs-4">{{ destinazione }} - {{ filtroCategoriaAttrazione }}</span>
+                    </p>
+                    
+                    <!-- Card con informazioni per ogni itinerario trovato -->
+                    <div class="card p-3 mx-auto shadow-sm border-0 d-flex flex-row align-items-center mw-350 radius-20" v-for="(itinerario, index) in itinerari" :key="index">
+                        <div class="me-3 bg-info bg-opacity-25 p-3 rounded-circle text-primary fs-3">🏛️</div>
+                        <div class="text-start">
+                            <h6 class="mb-0 fw-bold text-dark">{{ itinerario.nomeItinerario.value }}</h6>
+                            <small class="text-muted">Numero di tappe: {{ itinerario.numeroTappe.value }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FINE SCHERMATA PUBBLICO GENERICO -->
+
+    <!-- SCHERMATA 3: SPECIALISTA -->
+    <div v-else-if="currentRole === 'specialista'">
+        
+        <!-- --- SPECIALISTA: Form di Ricerca Itinerario --- -->
+        <div v-if="specStep === 0">
+            <div class="row justify-content-center">
+                <div class="col-md-6 rounded-4 p-5 shadow-lg bg-primary-dark">
+                    <div class="text-center text-white mb-4">
+                        <h2 class="fw-bold">Benvenuto!</h2>
+                        <p class="lead fs-5">Consulta qui il migliore itinerario</p>
+                    </div>
+
+                    <div class="mx-auto mw-400">
+                        <!-- Input per destinazione -->
+                        <div class="input-group mb-3 shadow-sm rounded-pill bg-white p-1">
+                            <span class="input-group-text bg-transparent border-0 fs-5">📍</span>
+                            <input type="text" class="form-control border-0 shadow-none bg-transparent" v-model="specDestinazione" placeholder="Inserisci destinazione (es. Roma)">
+                        </div>
+                        <!-- Input per tappe -->
+                        <div class="input-group mb-3 shadow-sm rounded-pill bg-white p-1">
+                            <span class="input-group-text bg-transparent border-0 fs-5">🏛️</span>
+                            <input type="number" class="form-control border-0 shadow-none bg-transparent" v-model="specTappeMinime" placeholder="Quante tappe minime? (es. 3)" min="1">
+                        </div>
+                        <!-- Input per scopo -->
+                        <div class="input-group mb-4 shadow-sm rounded-pill bg-white p-1">
+                            <span class="input-group-text bg-transparent border-0 fs-5">🎯</span>
+                            <select class="form-select border-0 shadow-none bg-transparent text-muted" v-model="specScopo">
+                                <option value="Cultura">Cultura</option>
+                                <option value="Natura">Natura</option>
+                                <option value="Lavoro">Lavoro</option>
+                            </select>
+                        </div>
+                        <!-- Bottone per cercare itinerari in base ai parametri inseriti -->
+                        <button class="btn w-100 rounded-pill fw-bold fs-5 shadow btn-action btn-cerca" @click="cercaItinerariSpecialista">
+                            Cerca
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- SPECIALISTA STEP 1: Risultati Ricerca --- -->
+        <div v-if="specStep === 1">
+            <div class="row justify-content-center">
+                <div class="col-md-6 rounded-4 p-5 shadow-lg text-center bg-primary-dark">
+                    <div class="mb-3">
+                        <div class="d-inline-block bg-secondary bg-opacity-75 rounded-circle p-3 shadow-sm text-white">
+                            <span class="fs-1">🏛️</span>
+                        </div>
+                    </div>
+                    <h3 class="fw-bold mb-3 text-white">Itinerari</h3>
+                    <p class="lead mb-4 text-white">I migliori risultati</p>
+                    
+                    <!-- Card con informazioni per ogni itinerario trovato -->
+                    <div class="card card-custom p-4 mx-auto shadow border-0 d-flex flex-column align-items-center mw-320 radius-20" v-for="(itinerario, index) in specItinerariTrovati" :key="index">
+                        <div class="d-flex align-items-center w-100 mb-4 justify-content-start">
+                            <div class="me-3 bg-info bg-opacity-25 p-3 rounded-circle text-primary fs-3">🏛️</div>
+                            <div class="text-start">
+                                <h6 class="mb-0 fw-bold text-dark">{{ itinerario.nomeItinerario.value }}</h6>
+                                <small class="text-muted">Numero di tappe: {{ itinerario.numeroTappe.value }}</small>
+                            </div>
+                        </div>
+                        <!-- Bottone per esplorare l'itinerario selezionato -->
+                        <button class="btn rounded-pill fw-bold shadow-sm px-5 btn-action" @click="esploraItinerario(itinerario)">
+                            Scopri
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- SPECIALISTA STEP 2: Dettaglio Attrazioni --- -->
+        <div v-if="specStep === 2">
+            <div class="row justify-content-center">
+                <div class="col-md-6 rounded-4 p-5 shadow-lg text-center bg-primary-dark">
+                    <h4 class="text-white fw-bold mb-5">Scopri le migliori attrazioni di {{ specDestinazione }}</h4>
+                    
+                    <!-- Card con informazioni per ogni attrazione trovata -->
+                    <div class="card p-3 mx-auto shadow-sm mb-4 border-0 d-flex flex-row align-items-center justify-content-between mw-380 radius-25" v-for="(attr, index) in specAttrazioniTrovate" :key="index">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 bg-info bg-opacity-25 p-3 rounded-circle text-primary fs-3">🏛️</div>
+                            <div class="text-start">
+                                <h6 class="mb-0 fw-bold text-dark fs-5">{{ attr.nomeAttrazione.value }}</h6>
+                                <small class="text-muted">Anno costruzione: {{ attr.anno ? attr.anno.value : 'N/D' }}</small>
+                            </div>
+                        </div>
+                        <div class="ps-3">
+                            <h4 class="fw-bold mb-0 text-dark">{{ attr.prezzo ? attr.prezzo.value : '0' }}€</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <!-- Bottone per passare allo step successivo: Alloggi -->
+                        <button class="btn btn-link text-decoration-none text-white fs-3" @click="esploraAlloggio">
+                            ➡<br><span class="fs-6 fw-light">Alloggi</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- SPECIALISTA STEP 3: Sezione Alloggi --- -->
+        <div v-if="specStep === 3 && specAlloggioTrovato">
+            <div class="row justify-content-center">
+                <div class="col-md-6 rounded-4 p-5 shadow-lg text-center bg-primary-dark">
+                    <div class="mb-3">
+                        <div class="d-inline-block bg-secondary bg-opacity-75 rounded-circle p-3 shadow-sm text-white">
+                            <span class="fs-1">🏠</span>
+                        </div>
+                    </div>
+                    <h4 class="text-white mb-5">Strutture ricettive incluse a:<br><span class="fw-bold fs-3">{{ specDestinazione }}</span></h4>
+                    
+                    <!-- Card con informazioni per l'alloggio trovato -->
+                    <div class="card p-4 mx-auto shadow-sm mb-5 border-0 d-flex flex-row align-items-center justify-content-between mw-400 radius-25">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 bg-info bg-opacity-25 p-3 rounded-circle text-primary fs-2">🏨</div>
+                            <div class="text-start">
+                                <h5 class="mb-0 fw-bold text-dark">{{ specAlloggioTrovato.nomeAlloggio.value }}</h5>
+                                <small class="text-warning fw-bold fs-6">⭐ {{ specAlloggioTrovato.stelle ? specAlloggioTrovato.stelle.value : 'N/D' }}/5</small>
+                            </div>
+                        </div>
+                        <div class="ps-3 text-center">
+                            <h3 class="fw-bold mb-0 text-dark">{{ specAlloggioTrovato.prezzo ? specAlloggioTrovato.prezzo.value : '0' }}€</h3>
+                        </div>
+                    </div>
+
+                    <!-- Bottoni di navigazione -->
+                    <div class="d-flex justify-content-between mt-4 px-5">
+                        <!-- Bottone per tornare allo step precedente: Attrazioni -->
+                        <button class="btn btn-link text-decoration-none text-white fs-3" @click="specStep = 2">
+                            ⬅<br><span class="fs-6 fw-light">Attrazioni</span>
+                        </button>
+                        <!-- Bottone per passare allo step successivo: Trasporti -->
+                        <button class="btn btn-link text-decoration-none text-white fs-3" @click="esploraTrasporti">
+                            ➡<br><span class="fs-6 fw-light">Trasporti</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- --- SPECIALISTA STEP 4: Sezione Trasporti --- -->
+        <div v-if="specStep === 4">
+            <div class="row justify-content-center">
+                <div class="col-md-6 rounded-4 p-5 shadow-lg text-center bg-primary-dark">
+                    <div class="mb-4">
+                        <div class="d-inline-block bg-secondary bg-opacity-75 rounded-circle p-3 shadow-sm text-white">
+                            <span class="fs-1">🚆</span>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-white mb-4">Mezzi di trasporto diretti a : <span class="fw-bold fs-3">{{ specDestinazione }}</span></h4>
+                    <h5 class="text-white fw-light mb-3 fs-6">Filtra per luogo di partenza:</h5>
+                    
+                    <!-- Input per filtrare i mezzi di trasporto in base al luogo di partenza -->
+                    <div class="input-group mb-5 shadow-sm rounded-pill bg-white p-1 mx-auto mw-320">
+                        <span class="input-group-text bg-transparent border-0 fs-5">📍</span>
+                        <input type="text" class="form-control border-0 shadow-none bg-transparent text-center fw-bold" v-model="specPartenza" placeholder="Es. Torino">
+                        <button class="btn btn-primary rounded-pill px-3" @click="esploraTrasporti">Filtra</button>
+                    </div>
+                    
+                    <!-- Card con informazioni per ogni mezzo di trasporto trovato -->
+                    <div class="card p-3 mx-auto shadow-sm mb-4 border-0 d-flex flex-row align-items-center mw-380 radius-20" v-for="(mezzo, index) in specTrasportiTrovati" :key="index">
+                        <div class="me-3 bg-info bg-opacity-25 p-3 rounded-circle text-primary fs-2">🚆</div>
+                        <div class="text-start">
+                            <h6 class="mb-1 fw-bold text-dark">{{ mezzo.nomeMezzo.value }}</h6>
+                            <small class="text-muted d-block">{{ mezzo.nomePartenza.value }} ➔ {{ mezzo.nomeArrivo.value }}</small>
+                            <small class="text-muted d-block mt-1">Gestito da: <strong>{{ mezzo.nomeCompagnia.value }}</strong></small>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <!-- Bottone per tornare allo step precedente: Alloggi -->
+                        <button class="btn btn-link text-decoration-none text-white fs-3" @click="specStep = 3">
+                            ⬅<br><span class="fs-6 fw-light">Alloggi</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FINE SCHERMATA SPECIALISTA -->
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

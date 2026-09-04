@@ -1,0 +1,77 @@
+/* --- IMPOSTAZIONI GLOBALI --- */
+body {
+    background-color: #f8f9fa; /* Colore di sfondo base (equivalente a bg-light) */
+}
+
+/* Sfondo principale (Login, Pubblico e Specialista) */
+.bg-primary-dark {
+    background-color: #275296 !important;
+}
+
+/* Bottoni di azione principale ("Cerca", "Scopri", etc.) */
+.btn-action {
+    background-color: #5b61ff !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Hover */
+.btn-action:hover {
+    background-color: #4a50e0 !important;
+    color: white !important;
+}
+.transition-hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.transition-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2) !important;
+}
+
+/* Spaziature bottoni */
+.btn-cerca {
+    padding: 10px;
+}
+.btn-login {
+    padding: 12px;
+}
+
+/* --- CARD E CONTENITORI --- */
+.card-custom {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Bordi arrotondati card */
+.radius-20 { border-radius: 20px !important; }
+.radius-25 { border-radius: 25px !important; }
+
+/*  Larghezza massima */
+.mw-220 { max-width: 220px; width: 100%; } /* Usato per le piccole card delle attrazioni */
+.mw-320 { max-width: 320px; width: 100%; } /* Usato per gli input di ricerca e card itinerari */
+.mw-350 { max-width: 350px; width: 100%; }
+.mw-380 { max-width: 380px; width: 100%; } /* Usato per le card dei trasporti */
+.mw-400 { max-width: 400px; width: 100%; } /* Usato per i form di login e ricerca base */
+.mw-500 { max-width: 500px; width: 100%; } /* Usato per la barra dei filtri alloggi */
+
+/* --- TIMELINE avanzamento Pubblico Generico --- */
+
+/* Linea orizzontale */
+.timeline-line {
+    border-top: 3px solid rgba(255, 255, 255, 0.31); /* Colore bianco semitrasparente */
+    width: 60%;
+    top: 30px;
+    z-index: 0;
+}
+
+/* Contenitore singolo step della timeline */
+.timeline-step {
+    z-index: 1;
+}
+
+/* Icona circolare */
+.timeline-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+}
